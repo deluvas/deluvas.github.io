@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang = "en">
+	<head>
+		<title> Ducks </title>
+		<meta charset = "UTF-8"/>
+		
+		<style type = "text/css">
+		body
+		{
+			padding: 0;
+			margin: 0;
+			
+			background-color: #000;
+			overflow: hidden;
+		}
+		
+		div#container
+		{
+			width: 100%;
+			position: absolute;
+			
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			
+			z-index: -1;
+		}
+		
+		object#rate
+		{
+			width: 100%;
+			height: 100%;
+			
+			position: absolute;
+			
+			min-height: 200px;
+		}
+		
+		embed
+		{
+			width: 100%;
+			height: 100%;
+			
+			min-height: 200px;
+		}
+		
+		p#text
+		{
+			font-family: Verdana;
+			color: #fff;
+			
+			margin: 0;
+			position: absolute;
+			
+			z-index: 1;
+			font-size: 150%;
+			
+			text-align: center;
+			white-space: nowrap;
+		}
+		
+		a
+		{
+			text-decoration: none;
+		}
+		</style>
+		
+		<script type = "text/javascript" src = "jquery.js"></script>
+		<script type = "text/javascript" src = "timespan.js"></script>
+		
+		<script type = "text/javascript">
+			$( document ).ready( function()
+			{
+				function onResize()
+				{
+					var jText = $( "p#text" ); 
+					jText.css( "left", $( "div" ).width() / 2 - ( jText.width() / 2 ) );
+					jText.css( "top", $( "div" ).height() * 0.1 - ( jText.height() / 2 ) );
+				}
+				
+				//Update the clock
+				var startDate = new Date( "2010/01/11 23:10:11" );
+				
+				function updateClock()
+				{
+					var endDate = new Date();
+					var diff = timeSpan( startDate, endDate, "years,months,weeks,days,hours,minutes,seconds,milliseconds" );
+					
+					$( "span" ).text( diff.years + " yrs, " + diff.months + " mths, " + diff.days + " days, " + diff.minutes + " mins, " + diff.seconds + " secs" );	
+				}
+				
+				onResize();
+				$( window ).bind( "resize", onResize );
+				
+				updateClock();
+				setInterval( updateClock, 1000 );
+			} );
+		</script>
+	</head>
+
+	<body>
+		<div id = "container">
+			<p id = "text"> Ducktor <a href = "http://forums.left4green.com/user/16-mayco/">Mayco</a> has been searching the Duckly Grail for:<br/><span> 0 </span></p>
+			
+			<object id = "rate">
+				<param name = "movie" value = "ratze.swf"/>
+				<param name = "wmode" value = "opaque"/>
+				
+				<!-- Firefox -->
+				<embed wmode = "opaque" src = "ratze.swf"></embed>
+			</object>
+		</div>
+	</body>
+</html>
